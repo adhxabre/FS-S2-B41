@@ -1,48 +1,41 @@
-import React, {useState} from 'react'
+import React from 'react'
+
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
+
+import Home from './pages/Home'
+import About from './pages/About'
+import Profile from './pages/Profile'
+import Signin from './pages/Signin'
 
 function App() {
-  const [state, setState] = useState(true)
-
-  const nama = "mbah"
-
-  function onChange(e) {
-    return setState(e.target.value)
-  }
-
-  function Login(props) {
-    return(
-      <div>
-        <h1>Welcome to my pages</h1>
-        <button onClick={props.login}>Login</button>
-      </div>
-    )
-  }
-
-  function Logout(props) {
-    return(
-      <div>
-        <h1>Already Logged in</h1>
-        <button onClick={props.logout}>Logout</button>
-      </div>
-    )
-  }
-
   return(
-    <div>
-      <h1>Kalo ngeklik button, ya sesuai tulisannya, bakal nambah atau ngurang</h1>
-      <p>{state}</p>
-
-      <p>{nama}</p>
-      {
-        state ? (
-          <Logout logout={() =>  setState(!state)} />
-        ) : (
-          <Login login={() => setState(!state)}/>
-        )
-      }
-
-      <input type="text" onChange={onChange} />
-    </div>
+    <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/profile">Profile</Link>
+            </li>
+            <li>
+              <Link to="/signin">Sign In</Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      
+      <Routes>
+        <Route exact path='/' element={<Home />} />
+        <Route exact path='/about' element={<About />} />
+        <Route exact path='/profile' element={<Profile />} />
+        <Route exact path='/signin' element={<Signin />} />
+      </Routes>
+    </Router>
   )
 }
 
