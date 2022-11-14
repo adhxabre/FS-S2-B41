@@ -1,3 +1,5 @@
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import React from 'react'
 
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
@@ -6,6 +8,8 @@ import Home from './pages/Home'
 import About from './pages/About'
 import Profile from './pages/Profile'
 import Signin from './pages/Signin'
+import DetailUser from './pages/DetailUser'
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return(
@@ -25,15 +29,21 @@ function App() {
             <li>
               <Link to="/signin">Sign In</Link>
             </li>
+            <li>
+              <Link to="/detail-user">Detail User</Link>
+            </li>
           </ul>
         </nav>
       </div>
       
       <Routes>
         <Route exact path='/' element={<Home />} />
-        <Route exact path='/about' element={<About />} />
-        <Route exact path='/profile' element={<Profile />} />
         <Route exact path='/signin' element={<Signin />} />
+        <Route exact path='/' element={<PrivateRoute/>}>
+          <Route exact path='/about' element={<About />} />
+          <Route exact path='/profile' element={<Profile />} />
+          <Route exact path='/detail-user/:id' element={<DetailUser />} />
+        </Route>
       </Routes>
     </Router>
   )
