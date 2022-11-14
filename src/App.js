@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  const [state, setState] = useState(true)
+
+  const nama = "mbah"
+
+  function onChange(e) {
+    return setState(e.target.value)
+  }
+
+  function Login(props) {
+    return(
+      <div>
+        <h1>Welcome to my pages</h1>
+        <button onClick={props.login}>Login</button>
+      </div>
+    )
+  }
+
+  function Logout(props) {
+    return(
+      <div>
+        <h1>Already Logged in</h1>
+        <button onClick={props.logout}>Logout</button>
+      </div>
+    )
+  }
+
+  return(
+    <div>
+      <h1>Kalo ngeklik button, ya sesuai tulisannya, bakal nambah atau ngurang</h1>
+      <p>{state}</p>
+
+      <p>{nama}</p>
+      {
+        state ? (
+          <Logout logout={() =>  setState(!state)} />
+        ) : (
+          <Login login={() => setState(!state)}/>
+        )
+      }
+
+      <input type="text" onChange={onChange} />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
