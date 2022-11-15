@@ -2,13 +2,23 @@ import { useReducer } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 
 // Declare counter variable here ...
+let counter = 0;
 
 function CounterWithVariable() {
   // Init useReducer for forceUpdate component here ...
+  const [_, forceUpdate] = useReducer((x) => x+1, 0)
 
   // Create function for Handle Increment here ...
+  const Add = () => {
+    counter = counter+1
+    forceUpdate()
+  }
 
   // Create function for Handle decrement here ...
+  const Less = () => {
+    counter = counter-1
+    forceUpdate()
+  }
 
   return (
     <Container>
